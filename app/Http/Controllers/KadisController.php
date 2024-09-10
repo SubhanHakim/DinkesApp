@@ -12,6 +12,8 @@ class KadisController extends Controller
 {
     public function index()
     {
+        $dataBidangs = Bidang::all();
+        $jumlahBidang = Bidang::count();
         $bidangs = ['P2P', 'SKD', 'Yankes', 'Kesmas'];
         $data = [];
 
@@ -31,7 +33,7 @@ class KadisController extends Controller
             ];
         }
 
-        return view('kadis.dashboard', compact('data'));
+        return view('kadis.dashboard', compact('data', 'dataBidangs', 'jumlahBidang'));
     }
 
     public function dataBidang()

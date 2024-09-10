@@ -41,7 +41,7 @@ Route::middleware(['auth', 'checkRole:bidang'])->group(function () {
 
 Route::middleware(['auth', 'checkRole:kadis'])->group(function () {
     Route::get('/kadis/dashboard', [KadisController::class, 'index'])->name('kadis.dashboard');
-    Route::get('/kadis/data-bidang', [KadisController::class, 'dataBidang'])->name('kadis.dataBidang');
+    Route::get('/kadis/{bidang}/data-bidang', [KadisController::class, 'dataBidang'])->name('kadis.dataBidang');
     Route::get('/kadis/data-bidang', [KadisController::class, 'dataBidang'])->name('kadis.dataBidang');
     Route::get('/kadis/view-monthly/{bidang}', [KadisController::class, 'viewMonthly'])->name('kadis.viewMonthly');
     Route::get('/kadis/inbox', [KadisController::class, 'inbox'])->name('kadis.inbox');

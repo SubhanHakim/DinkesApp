@@ -65,7 +65,7 @@
                             <td>{{ number_format($bidang->capaian_kinerja_tahunan_percent, 2) }}%</td>
                             <td>{{ $bidang->keterangan }}</td>
                             <td>
-                                <a href="{{ route('achievements.editMonthly', $bidang->id) }}" class="btn"><i
+                                <a href="{{ route('kadis.dataBidang', $bidang->id) }}" class="btn"><i
                                         class="bi bi-eye fs-4"></i></a>
                             </td>
                         </tr>

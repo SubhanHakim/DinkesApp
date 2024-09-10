@@ -36,7 +36,7 @@ class KadisController extends Controller
         return view('kadis.dashboard', compact('data', 'dataBidangs', 'jumlahBidang'));
     }
 
-    public function dataBidang()
+    public function dataBidang(Bidang $bidang)
     {
         $bidangs = Bidang::all();
         return view('kadis.dataBidang', compact('bidangs'));

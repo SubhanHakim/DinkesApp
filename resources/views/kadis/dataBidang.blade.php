@@ -1,67 +1,51 @@
 @extends('layouts.kadisApp')
 
 @section('content')
-    <div class="container" style="background-color: #ECECEC; margin-top: 100px; border-radius: 16px">
-        <div class="tabel-card">
-            <div>
-                <h3>Data Bidang ({{ $bidang->name }} - {{ $bidang->program }})</h3>
-            </div>
-            <form action="{{ route('achievements.updateMonthly', $bidang->id) }}" method="POST">
-                @csrf
-                @method('PUT')
+    <div class="container p-5">
+        <div class="p-4" style="background-color: #ECECEC">
+            <h1>Data Bidang</h1>
 
-                <table class="table">
-                    <thead>
+            @if (session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
+
+            <table class="table table-striped">
+                <thead class="bg-secondary text-white">
+                    <tr>
+                        <th>Bidang</th>
+                        <th>Seksi</th>
+                        <th>Program</th>
+                        <th>Target Kinerja</th>
+                        <th>Target Capaian</th>
+                        <th>Capaian Kinerja Tahunan</th>
+                        <th>Capaian Kinerja Tahunan (%)</th>
+                        <th>Keterangan</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($bidangs as $bidang)
                         <tr>
-                            <th>Bulan</th>
-                            <th>Target Capaian Bulanan</th>
-                            <th>Dalam Persen (%)</th>
-                            <th>Capaian Kinerja Bulanan</th>
-                            <th>Dalam Persen (%)</th>
-                            <th>Keterangan</th>
-                            <th>Aksi</th>
+                            <td>{{ $bidang->bidang }}</td>
+                            <td>{{ $bidang->seksi }}</td>
+                            <td>{{ $bidang->program }}</td>
+                            <td>{{ $bidang->target_kinerja }}</td>
+                            <td>{{ $bidang->target_capaian }}</td>
+                            <td>{{ $bidang->capaian_kinerja_tahunan }}</td>
+                            <td>{{ $bidang->capaian_kinerja_tahunan_percent }}%</td>
+                            <td>{{ $bidang->keterangan }}</td>
+                            <td>
+                                <a href="{{ route('kadis.viewMonthly', $bidang->id) }}" class="btn"><i
+                                        class="bi bi-eye fs-4"></i></a>
+                                <a  href="{{ route('comments.show', ['bidang_id' => $bidang->id, 'bulan' => 'Januari']) }}" class="btn" data-bs-toggle="modal"
+                                    data-bs-target="#chatModal-{{ $bidang->id }}"><i class="bi bi-chat fs-4"></i></a>
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($achievements as $achievement)
-                            <tr>
-                                <td>{{ $achievement->bulan }}</td>
-                                <td>{{ $achievement->target_capaian_bulanan }}</td>
-                                <td>
-                                    @if ($achievement->target_capaian_bulanan != 0)
-                                        {{ number_format(($achievement->capaian_kinerja_bulanan / $achievement->target_capaian_bulanan) * 100, 2) }}%
-                                    @else
-                                        0%
-                                    @endif
-                                </td>
-                                <td>
-                                    <input type="hidden" name="achievements[{{ $achievement->id }}][capaian_kinerja_bulanan]"
-                                        id="capaian_kinerja_bulanan_{{ $achievement->id }}"
-                                        value="{{ old('achievements.' . $achievement->id . '.capaian_kinerja_bulanan', $achievement->capaian_kinerja_bulanan) }}"
-                                        class="form-control" readonly>
-                                    {{ $achievement->capaian_kinerja_bulanan }}
-                                </td>
-                                <td>
-                                    {{ $achievement->percent_capaian_kinerja_bulanan }} %
-                                </td>
-                                <td>{{ $achievement->keterangan }}</td>
-                                <td>
-                                    <a href="{{ route('achievements.edit', ['id' => $achievement->id, 'bidangId' => $bidang->id, 'bulan' => $achievement->bulan]) }}"
-                                        class="btn"><i class="bi bi-pencil"></i></a>
-                                    <a href="{{ route('comments.show', ['bidang_id' => $bidang->id, 'bulan' => 'Januari']) }}"
-                                        class="btn">
-                                        <i class="bi bi-chat-dots"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-
-
-
-                <button type="submit" class="btn btn-primary">Simpan</button>
-            </form>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
 @endsection

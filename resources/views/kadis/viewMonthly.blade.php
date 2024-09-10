@@ -29,23 +29,4 @@
 
         <a href="{{ route('kadis.dataBidang') }}" class="btn btn-primary mt-3">Kembali</a>
     </div>
-
-    <div class="comments-section">
-        <h3>Comments</h3>
-        @foreach ($bidang->comments as $comment)
-            <div class="comment">
-                <strong>{{ $comment->user->name }}:</strong>
-                <p>{{ $comment->comment }}</p>
-                <small>{{ $comment->created_at->format('d M Y, H:i') }}</small>
-            </div>
-        @endforeach
-
-        @if (Auth::check())
-            <form action="{{ route('comments.store', $bidang->id) }}" method="POST">
-                @csrf
-                <textarea name="comment" class="form-control" rows="3" required></textarea>
-                <button type="submit" class="btn btn-primary mt-2">Submit Comment</button>
-            </form>
-        @endif
-    </div>
 @endsection

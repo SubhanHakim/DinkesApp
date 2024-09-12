@@ -195,3 +195,10 @@ table {
 .tabel-card {
     padding: 50px;
 }
+
+.bg-img {
+    background-image: url(../images/bg-dinkas.png);
+    height: 100vh;
+    background-repeat: no-repeat, repeat;
+    background-size: cover;
+}

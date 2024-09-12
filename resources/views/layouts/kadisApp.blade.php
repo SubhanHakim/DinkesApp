@@ -62,9 +62,9 @@
                         </a>
                     </li>
                     <li class="nav-style">
-                        <a class="nav-link d-flex flex-column justify-content-center align-items-center { Request::is('kadis/dashboard') ? 'active' : '' }} text-white fs-5"
-                            href="{{ route('kadis.dashboard') }}" style="padding: 0px !important;">
-                            <i class="bi bi-database {{ request()->is('kadis/dashboard') ? 'active' : '' }} text-white"
+                        <a class="nav-link d-flex flex-column justify-content-center align-items-center { Request::is('kadis/data-bidang') ? 'active' : '' }} text-white fs-5"
+                            href="{{ route('kadis.dataBidang') }}" style="padding: 0px !important;">
+                            <i class="bi bi-database {{ request()->is('kadis/data-bidang') ? 'active' : '' }} text-white"
                                 style="font-size: 24px;"></i>
                             <span>Data Bidang</span>
                         </a>

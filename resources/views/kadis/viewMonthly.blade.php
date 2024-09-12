@@ -12,6 +12,7 @@
                     <th>Capaian Kinerja Bulanan</th>
                     <th>Capaian (%)</th>
                     <th>Keterangan</th>
+                    <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -22,6 +23,13 @@
                         <td>{{ $achievement->capaian_kinerja_bulanan }}</td>
                         <td>{{ $achievement->capaian_kinerja_bulanan_percent }}%</td>
                         <td>{{ $achievement->keterangan }}</td>
+                        <td>
+                            <a href="{{ route('comments.show', ['bidang_id' => $bidang->id, 'bulan' => 'Januari']) }}"
+                                class="btn">
+                                <i class="bi bi-chat-dots"></i>
+                            </a>
+                        </td>
+                        
                     </tr>
                 @endforeach
             </tbody>

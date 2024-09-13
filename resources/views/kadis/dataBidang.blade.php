@@ -39,8 +39,6 @@
                             <td>
                                 <a href="{{ route('kadis.viewMonthly', $bidang->id) }}" class="btn"><i
                                         class="bi bi-eye fs-4"></i></a>
-                                <a  href="{{ route('comments.show', ['bidang_id' => $bidang->id, 'bulan' => 'Januari']) }}" class="btn" data-bs-toggle="modal"
-                                    data-bs-target="#chatModal-{{ $bidang->id }}"><i class="bi bi-chat fs-4"></i></a>
                             </td>
                         </tr>
                     @endforeach

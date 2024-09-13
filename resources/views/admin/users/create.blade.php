@@ -2,43 +2,6 @@
 
 @section('content')
     <div class="row g-4" style="height: 100vh">
-        {{-- <div class="col-md-2 position-relative">
-            <div class="navbar-sidebar d-flex flex-column justify-content-between align-items-center">
-                <div class="">
-                    <ul class="guide-gap" style="list-style: none;">
-                        <li class="text-white">
-                            <div class="flex-text" style="color: white">
-                                <i class="bi bi-house" style="font-size: 24px;"></i>
-                                <a href="{{ route('admin.dashboard') }}" class="nav-list-text"
-                                    style="text-decoration: none; color: white">Dashboard</a>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="flex-start">
-                                <i class="bi bi-person-add" style="font-size: 24px; color: #CDDC34"></i>
-                                <a href="{{ route('admin.users.create') }}" class="nav-list-text"
-                                    style="text-decoration: none; color: #CDDC34">Buat Akun</a>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="flex-start">
-                                <i class="bi bi-person" style="font-size: 24px; color: white"></i>
-                                <a href="{{route('admin.users.dataPegawai')}}" class="nav-list-text" style="text-decoration: none">Data Pegawai</a>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="flex-start">
-                                <i class="bi bi-database" style="font-size: 24px; color: white"></i>
-                                <a href="" class="nav-list-text" style="text-decoration: none">Data Bidang</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div>
-                    <button class="btn-nav">Logout</button>
-                </div>
-            </div>
-        </div> --}}
         <div class="col-md-10">
             <div class="p-4">
                 <div class="p-6 rounded-4" style="background-color: #ECECEC;">
@@ -56,7 +19,6 @@
                                         <input id="name" type="text"
                                             class="form-control @error('name') is-invalid @enderror" name="name"
                                             value="{{ old('name') }}" required autofocus>
-                                        x
                                         @error('name')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>

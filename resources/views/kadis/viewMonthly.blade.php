@@ -21,7 +21,7 @@
                         <td>{{ $achievement->bulan }}</td>
                         <td>{{ $achievement->target_capaian_bulanan }}</td>
                         <td>{{ $achievement->capaian_kinerja_bulanan }}</td>
-                        <td>{{ $achievement->capaian_kinerja_bulanan_percent }}%</td>
+                        <td>{{ $achievement->percent_capaian_kinerja_bulanan }} %</td>
                         <td>{{ $achievement->keterangan }}</td>
                         <td>
                             <a href="{{ route('comments.show', ['bidang_id' => $bidang->id, 'bulan' => 'Januari']) }}"

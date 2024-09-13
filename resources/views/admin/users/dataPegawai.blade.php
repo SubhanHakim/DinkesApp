@@ -4,7 +4,7 @@
     <div class="row g-4" style="height: 100vh">
         <div class="col-md-12">
             <div class="p-4">
-                <div class="p-6" style="background-color: #ECECEC;">
+                <div class="p-6 rounded-2" style="background-color: #ECECEC;">
                     <div class="p-4">
                         <h3 class="dash-head">Data Pegawai ({{ $pegawaiCount }})</h3>
                     </div>
@@ -26,7 +26,6 @@
                         <table class="table table-bordered" id="pegawaiTable">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
                                     <th>Nama</th>
                                     <th>NIP</th>
                                     <th>Nomor Telepon</th>
@@ -37,7 +36,6 @@
                             <tbody>
                                 @foreach ($allPegawai as $p)
                                     <tr>
-                                        <td>{{ $p->id }}</td>
                                         <td>{{ $p->name }}</td>
                                         <td>{{ $p->nip }}</td>
                                         <td>{{ $p->phone_number }}</td>

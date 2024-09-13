@@ -40,8 +40,9 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #047D78 !important;">
         <div class="container">
             <!-- Logo -->
-            <a class="navbar-brand" href="{{ url('/') }}">
+            <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
                 <img src="{{ asset('images/logo.png') }}" alt="Logo" style="height: 40px;">
+                <H3 class="text-uppercase fs-5 fw-bold text-white">Dinas Kesehatan <br> Kota Tasikmalaya</H3>
             </a>
 
             <!-- Toggler button for mobile view -->
@@ -70,10 +71,14 @@
                         </a>
                     </li>
                 </ul>
-                <div class="nav-item dropdown text-white">
-                    <a id="navbarDropdown" class="nav-link dropdown-toggle text-white" href="#" role="button"
-                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                        {{ Auth::user()->name }}
+                <div class="nav-item dropdown text-white d-flex gap-4">
+                    <div class="rounded-circle bg-secondary text-white d-flex justify-content-center align-items-center"
+                        style="width: 50px; height: 50px;">
+                        {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+                    </div>
+                    <a id="navbarDropdown" class="nav-link fs-1" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false" v-pre>
+                        <i class="bi bi-box-arrow-left"></i>
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">

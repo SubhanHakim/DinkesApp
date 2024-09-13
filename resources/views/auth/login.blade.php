@@ -24,7 +24,7 @@
                 <div class="h-100 d-flex gap-5 flex-column justify-content-center align-items-center">
                     <div class="text-center">
                         <div>
-                            <img src="{{ asset('images/logo.png') }}" style="width: 100px" alt="Logo_dinkes">
+                            <img src="{{ asset('images/Logo_Kemenkes.png') }}" style="width: 100px" alt="Logo_dinkes">
                             <img src="{{ asset('images/logo_pemkot.png') }}" style="width: 100px" alt="Logo_dinkes">
                         </div>
                         <h1 class="fs-1 text-white fw-bold">Selamat Datang Kembali!</h1>

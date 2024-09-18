@@ -20,7 +20,7 @@
 <body class="">
     <div class="box-login">
         <div class="h-100 row align-content-center">
-            <div class="bg-primary-set h-100 col-8 rounded-start-4">
+            <div class="bg-primary-set h-100 col-12 col-md-8 rounded-start-4 rounded-md-4">
                 <div class="h-100 d-flex gap-5 flex-column justify-content-center align-items-center">
                     <div class="text-center">
                         <div>
@@ -30,44 +30,46 @@
                         <h1 class="fs-1 text-white fw-bold">Selamat Datang Kembali!</h1>
                         <p class="paragraph-primary">Dimohon untuk memasukan username dan password</p>
                     </div>
+                    <div class="w-100">
+                        <form method="POST" action="{{ route('login') }}" class="text-center">
+                            @csrf
+                            <div class="d-flex flex-column gap-3 justify-content-center align-items-center">
+                                <div class="col-md-6 w-100">
+                                    <input id="email" type="email"
+                                        class="form-control input-primary @error('email') is-invalid @enderror"
+                                        style="width: 100%" name="email" value="{{ old('email') }}"
+                                        placeholder="Email" required autocomplete="email" autofocus>
 
-                    <form method="POST" action="{{ route('login') }}" class="text-center">
-                        @csrf
-                        <div class="d-flex flex-column gap-3">
-                            <div class="col-md-6">
-                                <input id="email" type="email"
-                                    class="form-control input-primary @error('email') is-invalid @enderror"
-                                    name="email" value="{{ old('email') }}" placeholder="Email" required autocomplete="email" autofocus>
+                                    @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 w-100">
+                                    <input id="password" type="password"
+                                        class="form-control input-primary @error('password') is-invalid @enderror w-100"
+                                        name="password" placeholder="Password" required autocomplete="current-password">
 
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                                    @error('password')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
                             </div>
-                            <div class="col-md-6">
-                                <input id="password" type="password"
-                                    class="form-control input-primary @error('password') is-invalid @enderror" name="password" placeholder="Password"
-                                    required autocomplete="current-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                            <div class="mt-4">
+                                <button type="submit" class="btn-primary-custom btn btn-primary w-100">
+                                    {{ __('Login') }}
+                                </button>
                             </div>
-                        </div>
-                        <div class="mt-4">
-                            <button type="submit" class="btn-primary-custom">
-                                {{ __('Login') }}
-                            </button>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
-            <div class="bg-secondary-set col-4 h-100 rounded-end-4">
-                <div class="d-flex flex-column justify-content-center align-items-center h-100">
-                    <img src="{{ asset('images/animasi.png') }}" style="width: 400px" alt="">
+            <div class="bg-secondary-set d-none d-md-block col-4 h-100 rounded-end-4 ">
+                <div class=" d-flex flex-column justify-content-center align-items-center h-100">
+                    <img src="{{ asset('images/animasi.png') }}" class="" style="width: 400px" alt="">
                 </div>
             </div>
         </div>

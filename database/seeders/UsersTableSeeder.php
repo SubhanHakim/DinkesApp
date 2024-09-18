@@ -16,16 +16,16 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         User::create([
-            'name' => 'Admin User',
-            'email' => 'admin@example.com',
-            'password' => Hash::make('password'),
-            'role' => 'admin',
-            'nama_depan' => 'Admin',
-            'nama_belakang' => 'User',
-            'nip' => '1234567890',
-            'phone_number' => '081234567890',
-            'bidang' => 'p2p',
-            'program' => 'Program Admin',
+            'name' => 'apt. Iyus Kusnandar, S.Si',
+            'email' => 'iyuskusnandar23984ke2@gmail.com',
+            'password' => Hash::make('p2p2024'),
+            'role' => 'bidang',
+            'nama_depan' => 'PTM',
+            'nama_belakang' => '- IYUS',
+            'nip' => '-198409232024211001', 
+            'phone_number' => '+82118182408', 
+            'bidang' => 'P2P',
+            'program' => 'Kanker dan Kelainan Darah',
         ]);
 
         User::create([

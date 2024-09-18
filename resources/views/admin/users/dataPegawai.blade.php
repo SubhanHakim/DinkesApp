@@ -1,16 +1,19 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="row g-4" style="height: 100vh">
-        <div class="col-md-12">
+    <div class="row g-4" style="min-height: 100vh;">
+        <div class="col-12">
             <div class="p-4">
                 <div class="p-6 rounded-2" style="background-color: #ECECEC;">
-                    <div class="p-4">
-                        <h3 class="dash-head">Data Pegawai ({{ $pegawaiCount }})</h3>
+                    <!-- Header Section -->
+                    <div class="p-4 text-center text-md-start">
+                        <h3 class="dash-head" style="font-size: 24px; font-weight: bold;">Data Pegawai ({{ $pegawaiCount }})</h3>
                     </div>
-                    <div class="p-4 col-md-3">
+                    
+                    <!-- Filter Section -->
+                    <div class="p-4 col-12 col-md-6 col-lg-3">
                         <form method="GET" action="{{ route('admin.users.dataPegawai') }}">
-                            <div class="form-group">
+                            <div class="form-group mb-3">
                                 <label for="bidang">Filter by Bidang:</label>
                                 <select name="bidang" id="bidang" class="form-control" onchange="this.form.submit()">
                                     <option value="">--Select Bidang--</option>
@@ -22,15 +25,17 @@
                             </div>
                         </form>
                     </div>
-                    <div class="p-4">
-                        <table class="table table-bordered" id="pegawaiTable">
-                            <thead>
+                    
+                    <!-- Table Section -->
+                    <div class="table-responsive p-4">
+                        <table class="table table-bordered table-striped">
+                            <thead class="thead-dark">
                                 <tr>
-                                    <th>Nama</th>
-                                    <th>NIP</th>
-                                    <th>Nomor Telepon</th>
-                                    <th>Bidang</th>
-                                    <th>Program</th>
+                                    <th scope="col">Nama</th>
+                                    <th scope="col">NIP</th>
+                                    <th scope="col">Nomor Telepon</th>
+                                    <th scope="col">Bidang</th>
+                                    <th scope="col">Program</th>
                                 </tr>
                             </thead>
                             <tbody>

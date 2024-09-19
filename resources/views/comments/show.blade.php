@@ -1,4 +1,9 @@
-@extends('layouts.bidangApp')
+@if (Auth::user()->role == 'bidang')
+    @extends('layouts.bidangApp')
+@elseif (Auth::user()->role == 'kadis')
+    @extends('layouts.kadisApp')
+@endif
+
 
 @section('content')
     <div class="container p-4">

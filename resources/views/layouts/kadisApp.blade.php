@@ -52,7 +52,7 @@
             </button>
 
             <!-- Navbar links and logout button -->
-            <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarNav">
+            <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav gap-4">
                     <li class="nav-style">
                         <a class="nav-link d-flex flex-column justify-content-center align-items-center {{ Request::is('kadis/dashboard') ? 'active' : '' }} text-white fs-5"
@@ -71,7 +71,7 @@
                         </a>
                     </li>
                 </ul>
-                <div class="nav-item dropdown text-white d-flex gap-4">
+                <div class="nav-item dropdown text-white d-flex gap-4 justify-content-center">
                     <div class="rounded-circle bg-secondary text-white d-flex justify-content-center align-items-center"
                         style="width: 50px; height: 50px;">
                         {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}

@@ -40,6 +40,7 @@
         <!-- Tombol Kembali -->
         <div class="text-center text-md-start mt-4">
             <a href="{{ route('kadis.dataBidang') }}" class="btn btn-primary">Kembali</a>
-        </div>
+        </div>cls
+        
     </div>
 @endsection

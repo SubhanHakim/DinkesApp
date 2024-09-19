@@ -100,7 +100,7 @@
                         </li>
                     </ul>
                     <div class="nav-item dropdown text-white d-flex gap-4 justify-content-center align-content-center">
-                        <div class="d-none d-md-block rounded-circle bg-secondary text-white d-flex justify-content-center align-items-center"
+                        <div class="rounded-circle bg-secondary text-white d-flex justify-content-center align-items-center"
                             style="width: 50px; height: 50px;">
                             {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
                         </div>

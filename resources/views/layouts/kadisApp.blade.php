@@ -40,7 +40,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #047D78 !important;">
         <div class="container">
             <!-- Logo -->
-            <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
+            <a href="{{ route('kadis.dashboard') }}" class="navbar-brand d-flex align-items-center" href="{{ url('kadis/dashboard') }}">
                 <img src="{{ asset('images/logo.png') }}" alt="Logo" style="height: 40px;">
                 <H3 class="text-uppercase fs-5 fw-bold text-white">Dinas Kesehatan <br> Kota Tasikmalaya</H3>
             </a>

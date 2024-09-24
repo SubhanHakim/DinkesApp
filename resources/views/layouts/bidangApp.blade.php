@@ -51,7 +51,8 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #047D78 !important;">
             <div class="container">
                 <!-- Logo -->
-                <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
+                <a href="{{ url('bidang') }}" class="navbar-brand d-flex align-items-center"
+                    href="{{ url('/bidang') }}">
                     <img src="{{ asset('images/logo.png') }}" alt="Logo" style="height: 40px;">
                     <H3 class="text-uppercase fs-5 fw-bold text-white">Dinas Kesehatan <br> Kota Tasikmalaya</H3>
                 </a>
@@ -87,8 +88,8 @@
                             style="width: 50px; height: 50px;">
                             {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
                         </div>
-                        <a id="navbarDropdown" class="nav-link fs-1" href="#"
-                            role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        <a id="navbarDropdown" class="nav-link fs-1" href="#" role="button"
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             <i class="bi bi-box-arrow-left"></i>
                         </a>
 

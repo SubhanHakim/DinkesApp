@@ -25,7 +25,10 @@ Route::middleware(['auth', 'role:' . Role::Admin->value])->group(function () {
     Route::post('/admin/users', [AdminController::class, 'store'])->name('admin.users.store');
     Route::get('/admin/achievements', [BidangController::class, 'index'])->name('admin.index');
     Route::get('/admin/achievements/create', [BidangController::class, 'create'])->name('admin.create');
+    Route::get('/admin/achievements/edit/{id}', [BidangController::class, 'edit'])->name('admin.edit');
+    Route::put('/admin/achievements/update/{id}', [BidangController::class, 'updateAdmin'])->name('admin.update');
     Route::post('/admin/achievements', [BidangController::class, 'store'])->name('admin.store');
+    Route::delete('/admin/achievements/{id}', [AdminController::class, 'destroy'])->name('admin.destroy');
 });
 
 Route::middleware(['auth', 'checkRole:bidang'])->group(function () {

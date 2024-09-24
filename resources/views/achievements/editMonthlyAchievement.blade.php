@@ -33,7 +33,7 @@
                                 <label for="capaian_kinerja_bulanan" class="form-label">Capaian Bulan {{ $achievement->bulan }}</label>
                                 <input type="number" name="capaian_kinerja_bulanan" id="capaian_kinerja_bulanan"
                                     value="{{ old('capaian_kinerja_bulanan', $achievement->capaian_kinerja_bulanan) }}"
-                                    class="form-control" required>
+                                    class="form-control">
                             </div>
                         </div>
 

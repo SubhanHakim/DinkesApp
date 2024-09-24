@@ -28,10 +28,11 @@
                             @foreach ($achievements as $achievement)
                                 <tr class="text-center">
                                     <td>{{ $achievement->bulan }}</td>
-                                    <td>{{ $achievement->target_capaian_bulanan }}</td>
+                                    <td>
+                                        {{ $achievement->target_capaian_bulanan }}</td>
                                     <td>
                                         @if ($achievement->target_capaian_bulanan != 0)
-                                            {{ number_format(($achievement->capaian_kinerja_bulanan / $achievement->target_capaian_bulanan) * 100, 2) }}%
+                                            {{ number_format(($achievement->target_capaian_bulanan / $achievement->target_capaian_bulanan) * 100, ) }}%
                                         @else
                                             0%
                                         @endif

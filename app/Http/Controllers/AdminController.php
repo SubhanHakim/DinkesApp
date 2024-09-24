@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\Role;
+use App\Models\Bidang;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -75,10 +76,40 @@ class AdminController extends Controller
         return view('admin.users.dataPegawai', compact('allPegawai', 'pegawaiCount', 'bidang'));
     }
 
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'bidang' => 'required',
+            'seksi' => 'required',
+            'program' => 'required',
+            'target_kinerja' => 'required|numeric',
+            'target_capaian' => 'required|numeric',
+        ]);
+
+        $bidang = Bidang::findOrFail($id);
+        $bidang->update($request->all());
+
+        return redirect()->route('admin.index')->with('success', 'Data Bidang berhasil diperbarui.');
+    }
+
+    public function edit($id)
+    {
+        $bidang = Bidang::findOrFail($id);
+        return view('admin.edit', compact('bidang'));
+    }
+
     public function filterByBidang(Request $request)
     {
         $bidang = $request->input('bidang');
         $allPegawai = User::where('bidang', $bidang)->get();
         return view('admin.users.dataPegawai', compact('allPegawai'));
+    }
+
+    public function destroy($id)
+    {
+        $bidang = Bidang::findOrFail($id);
+        $bidang->delete();
+
+        return redirect()->route('admin.index')->with('success', 'Data Bidang berhasil dihapus.');
     }
 }

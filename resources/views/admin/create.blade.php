@@ -43,7 +43,7 @@
                         <input type="number" name="target_capaian" id="target_capaian" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label for="target_capaian_percent">Pesern Target:</label>
+                        <label for="target_capaian_percent">Persen Target:</label>
                         <input type="number" name="target_capaian_percent" id="target_capaian_percent" class="form-control"
                             required>
                     </div>

@@ -38,9 +38,13 @@ class BidangController extends Controller
         return redirect()->route('admin.index')->with('success', 'Bidang added successfully.');
     }
 
-    public function edit(Bidang $achievement)
+    public function edit($id)
     {
-        return view('achievements.edit', compact('achievement'));
+        // Cari bidang berdasarkan ID
+        $bidang = Bidang::findOrFail($id);
+
+        // Tampilkan view untuk edit data bidang
+        return view('admin.edit', compact('bidang'));
     }
 
     public function update(Request $request, Bidang $achievement)
@@ -135,7 +139,8 @@ class BidangController extends Controller
             return redirect()->back()->with('error', 'Data achievements tidak ditemukan atau tidak valid.');
         }
 
-        $totalCapaianTahunan = 0;
+        $totalCapaianTahunan = 0;  // Untuk menghitung total capaian tahunan
+        $totalTargetCapaianBulanan = 0;  // Untuk menghitung total target capaian bulanan
 
         // Update data bulanan
         foreach ($achievements as $achievementId => $data) {
@@ -144,6 +149,9 @@ class BidangController extends Controller
             if (!$achievement) {
                 continue; // Lewatkan jika achievement tidak ditemukan
             }
+
+            // Akumulasi target capaian bulanan
+            $totalTargetCapaianBulanan += $achievement->target_capaian_bulanan;
 
             // Update capaian kinerja bulanan
             $achievement->capaian_kinerja_bulanan = $data['capaian_kinerja_bulanan'];
@@ -157,12 +165,22 @@ class BidangController extends Controller
 
         // Update capaian kinerja tahunan dan persentase di tabel bidang
         $bidang->capaian_kinerja_tahunan = $totalCapaianTahunan;
+
+        // Akumulasi target capaian bulanan ke dalam target capaian tahunan di tabel bidang
+        $bidang->target_capaian = $totalTargetCapaianBulanan;
+
+        // Perbarui persentase capaian tahunan berdasarkan target tahunan yang sudah diperbarui
         $bidang->capaian_kinerja_tahunan_percent = ($totalCapaianTahunan / $bidang->target_capaian) * 100;
+
+        // Perbarui keterangan apakah target tahunan tercapai atau tidak
         $bidang->keterangan = $totalCapaianTahunan >= $bidang->target_capaian ? 'Target tercapai' : 'Target tidak tercapai';
+
+        // Simpan perubahan
         $bidang->save();
 
         return redirect()->route('achievements.bidangIndex')->with('success', 'Achievement updated successfully.');
     }
+
 
     public function editMonthlyAchievement($id, $bidangId, $bulan)
     {
@@ -178,16 +196,76 @@ class BidangController extends Controller
     {
         $achievement = MonthlyAchievement::findOrFail($id);
 
+        // Validasi input dari form
         $request->validate([
+            'target_capaian' => 'required|numeric',
             'capaian_kinerja_bulanan' => 'required|numeric',
         ]);
 
-        // Perbarui data capaian kinerja bulanan
+        // Update target capaian bulanan jika diperlukan
+        $achievement->target_capaian_bulanan = $request->target_capaian;
+
+        // Update capaian kinerja bulanan
         $achievement->capaian_kinerja_bulanan = $request->capaian_kinerja_bulanan;
         $achievement->percent_capaian_kinerja_bulanan = ($achievement->capaian_kinerja_bulanan / $achievement->target_capaian_bulanan) * 100;
+
+        // Update keterangan apakah target tercapai atau tidak
         $achievement->keterangan = $achievement->capaian_kinerja_bulanan >= $achievement->target_capaian_bulanan ? 'Target tercapai' : 'Target tidak tercapai';
+
+        // Simpan perubahan
         $achievement->save();
 
-        return redirect()->route('achievements.editMonthly', $achievement->bidang_id)->with('success', 'Data berhasil diperbarui');
+        // Hitung ulang total capaian tahunan
+        $totalCapaianTahunan = MonthlyAchievement::where('bidang_id', $achievement->bidang_id)
+            ->sum('capaian_kinerja_bulanan');
+
+        // Update capaian kinerja tahunan di tabel bidang
+        $bidang = Bidang::findOrFail($achievement->bidang_id);
+        $bidang->capaian_kinerja_tahunan = $totalCapaianTahunan;
+        $bidang->capaian_kinerja_tahunan_percent = ($totalCapaianTahunan / $bidang->target_capaian) * 100;
+        $bidang->keterangan = $totalCapaianTahunan >= $bidang->target_capaian ? 'Target tercapai' : 'Target tidak tercapai';
+        $bidang->save();
+
+        // Redirect dengan pesan sukses
+        return redirect()->route('achievements.editMonthly', $achievement->bidang_id)
+            ->with('success', 'Data berhasil diperbarui');
+    }
+
+
+
+    public function updateAdmin(Request $request, $id)
+    {
+
+        // Validasi data yang diinput
+        $request->validate([
+            'bidang' => 'required|string',
+            'seksi' => 'required|string|max:255',
+            'program' => 'required|string|max:255',
+            'target_kinerja' => 'required|string|max:255',
+            'target_capaian' => 'required|integer',
+            'target_capaian_percent' => 'required|numeric',
+        ]);
+
+        // Ambil data bidang berdasarkan ID
+        $bidang = Bidang::find($id);
+
+        // Cek apakah data bidang ditemukan
+        if (!$bidang) {
+            return redirect()->back()->with('error', 'Bidang tidak ditemukan.');
+        }
+
+        // Update data bidang
+        $bidang->update($request->all());
+
+        // Redirect dengan pesan sukses
+        return redirect()->route('admin.index')->with('success', 'Data berhasil diupdate');
+    }
+
+    public function destroy($id)
+    {
+        $bidang = Bidang::findOrFail($id);
+        $bidang->delete();
+
+        return redirect()->route('admin.index')->with('success', 'Data Bidang berhasil dihapus.');
     }
 }

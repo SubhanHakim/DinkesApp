@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container mt-5">
-        <h1>Selamat Datang, Kadis!</h1>
+        <h1>Selamat Datang {{Auth::user()->name}}</h1>
         <div class="row">
             @foreach ($data as $bidangData)
                 <div class="col-md-3 mb-4">
@@ -19,7 +19,6 @@
                                     <p>Belum Selesai</p>
                                 </div>
                             </div>
-                            {{-- <a href="{{ route('kadis.bidangDetail', $bidangData['bidang']) }}" class="stretched-link"></a> --}}
                         </div>
                     </div>
                 </div>

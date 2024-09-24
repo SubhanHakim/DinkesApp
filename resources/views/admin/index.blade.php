@@ -28,6 +28,7 @@
                             <th>Capaian Kinerja Tahunan</th>
                             <th>Capaian Kinerja Tahunan (%)</th>
                             <th>Keterangan</th>
+                            <th>Action</th> <!-- Tambahkan kolom aksi -->
                         </tr>
                     </thead>
                     <tbody>
@@ -42,6 +43,15 @@
                                 <td>{{ $bidang->capaian_kinerja_tahunan }}</td>
                                 <td>{{ $bidang->capaian_kinerja_tahunan_percent }}%</td>
                                 <td>{{ $bidang->keterangan }}</td>
+                                <td>
+                                    <a href="{{ route('admin.edit', $bidang->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                                    <form action="{{ route('admin.destroy', $bidang->id) }}" method="POST" style="display:inline-block">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-danger" 
+                                            onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Delete</button>
+                                    </form>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>

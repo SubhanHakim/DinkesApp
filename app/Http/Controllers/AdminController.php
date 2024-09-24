@@ -66,6 +66,7 @@ class AdminController extends Controller
 
     public function showAll(Request $request)
     {
+        $users = User::all();
         $bidang = $request->input('bidang');
         if ($bidang) {
             $allPegawai = User::where('bidang', $bidang)->get();
@@ -73,7 +74,7 @@ class AdminController extends Controller
             $allPegawai = User::all();
         }
         $pegawaiCount = $allPegawai->count(); // Menambahkan variabel untuk menghitung jumlah pegawai
-        return view('admin.users.dataPegawai', compact('allPegawai', 'pegawaiCount', 'bidang'));
+        return view('admin.users.dataPegawai', compact('allPegawai', 'users', 'pegawaiCount', 'bidang',));
     }
 
     public function update(Request $request, $id)
@@ -111,5 +112,81 @@ class AdminController extends Controller
         $bidang->delete();
 
         return redirect()->route('admin.index')->with('success', 'Data Bidang berhasil dihapus.');
+    }
+
+    public function destroyUser($id)
+    {
+        $users = User::findOrFail($id);
+
+        $users->delete();
+
+        return redirect()->route('admin.users.dataPegawai',)->with('success', "User Berhasil Dihapus");
+    }
+
+    public function editUser($id)
+    {
+        $user = User::findOrFail($id);
+
+
+        return view('admin.users.edit', compact('user'));
+    }
+
+    public function updateUser(Request $request, $id)
+    {
+        // Cari user berdasarkan ID
+        $user = User::findOrFail($id);
+
+        // Validasi data input
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => [
+                'nullable',
+                'string',
+                'email',
+                'max:255',
+                Rule::unique('users')->ignore($id),
+            ],
+            'password' => [
+                'nullable', // Password boleh kosong jika tidak diubah
+                'string',
+                'min:8',    // Minimal 8 karakter jika diisi
+            ],
+            'role' => 'required|string|in:admin,bidang,kadis', // Memastikan role valid
+            'nama_depan' => 'required|string|max:255',
+            'nama_belakang' => 'required|string|max:255',
+            'nip' => 'required|string|max:255',
+            'phone_number' => 'required|string|max:255',
+            'program' => $user->role === 'kadis' ? 'nullable|string|max:255' : 'required|string|max:255',
+            'bidang' => $user->role === 'kadis' ? 'nullable|string|max:255' : 'required|string|max:255',
+        ]);
+
+        // Update data user
+        $user->name = $request->input('name');
+        if ($request->filled('email')) {
+            $user->email = $request->input('email');
+        }
+        if ($request->filled('password')) {
+            $user->password = bcrypt($request->input('password')); // Hash password baru
+        }
+        $user->role = $request->input('role');
+        $user->nama_depan = $request->input('nama_depan');
+        $user->nama_belakang = $request->input('nama_belakang');
+        $user->nip = $request->input('nip');
+        $user->phone_number = $request->input('phone_number');
+
+        // Update program dan bidang hanya jika role bukan 'kadis'
+        if ($user->role !== 'kadis') {
+            $user->program = $request->input('program');
+            $user->bidang = $request->input('bidang');
+        } else {
+            // Jika role kadis, set program dan bidang ke null
+            $user->program = null;
+            $user->bidang = null;
+        }
+
+        $user->save();
+
+        // Redirect ke halaman daftar user dengan pesan sukses
+        return redirect()->route('admin.users.dataPegawai')->with('success', 'User berhasil diperbarui');
     }
 }

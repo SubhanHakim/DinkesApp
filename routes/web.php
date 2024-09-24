@@ -23,6 +23,9 @@ Route::middleware(['auth', 'role:' . Role::Admin->value])->group(function () {
     Route::get('/admin/users/dataPegawai', [AdminController::class, 'showAll'])->name('admin.users.dataPegawai');
     Route::get('/admin/users/filter', [App\Http\Controllers\AdminController::class, 'filterByBidang'])->name('admin.users.filter');
     Route::post('/admin/users', [AdminController::class, 'store'])->name('admin.users.store');
+    Route::delete('/admin/users/{id}', [AdminController::class, 'destroyUser'])->name('admin.users.destroyUser');
+    Route::get('/admin/users/{id}/edit', [AdminController::class, 'editUser'])->name('admin.users.edit');
+    Route::put('/admin/users/{id}', [AdminController::class, 'updateUser'])->name('admin.users.updateUser');
     Route::get('/admin/achievements', [BidangController::class, 'index'])->name('admin.index');
     Route::get('/admin/achievements/create', [BidangController::class, 'create'])->name('admin.create');
     Route::get('/admin/achievements/edit/{id}', [BidangController::class, 'edit'])->name('admin.edit');

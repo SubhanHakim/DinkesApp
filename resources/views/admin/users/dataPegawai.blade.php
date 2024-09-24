@@ -7,9 +7,10 @@
                 <div class="p-6 rounded-2" style="background-color: #ECECEC;">
                     <!-- Header Section -->
                     <div class="p-4 text-center text-md-start">
-                        <h3 class="dash-head" style="font-size: 24px; font-weight: bold;">Data Pegawai ({{ $pegawaiCount }})</h3>
+                        <h3 class="dash-head" style="font-size: 24px; font-weight: bold;">Data Pegawai ({{ $pegawaiCount }})
+                        </h3>
                     </div>
-                    
+
                     <!-- Filter Section -->
                     <div class="p-4 col-12 col-md-6 col-lg-3">
                         <form method="GET" action="{{ route('admin.users.dataPegawai') }}">
@@ -19,13 +20,15 @@
                                     <option value="">--Select Bidang--</option>
                                     <option value="p2p" {{ request('bidang') == 'p2p' ? 'selected' : '' }}>P2P</option>
                                     <option value="sdk" {{ request('bidang') == 'sdk' ? 'selected' : '' }}>SDK</option>
-                                    <option value="kesmas" {{ request('bidang') == 'kesmas' ? 'selected' : '' }}>Kesmas</option>
-                                    <option value="yankes" {{ request('bidang') == 'yankes' ? 'selected' : '' }}>Yankes</option>
+                                    <option value="kesmas" {{ request('bidang') == 'kesmas' ? 'selected' : '' }}>Kesmas
+                                    </option>
+                                    <option value="yankes" {{ request('bidang') == 'yankes' ? 'selected' : '' }}>Yankes
+                                    </option>
                                 </select>
                             </div>
                         </form>
                     </div>
-                    
+
                     <!-- Table Section -->
                     <div class="table-responsive p-4">
                         <table class="table table-bordered table-striped">
@@ -36,6 +39,7 @@
                                     <th scope="col">Nomor Telepon</th>
                                     <th scope="col">Bidang</th>
                                     <th scope="col">Program</th>
+                                    <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -46,6 +50,16 @@
                                         <td>{{ $p->phone_number }}</td>
                                         <td>{{ $p->bidang }}</td>
                                         <td>{{ $p->program }}</td>
+                                        <td>
+                                            <a href="{{ route('admin.users.edit', $p->id) }}" class="btn btn-warning">Edit</a>
+                                            <form action="{{ route('admin.users.destroyUser', $p->id) }}" method="POST"
+                                                style="display:inline-block">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-sm btn-danger"
+                                                    onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Delete</button>
+                                            </form>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
